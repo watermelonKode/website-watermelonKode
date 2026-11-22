@@ -19,7 +19,7 @@
   <meta name="twitter:description" content="You already understand English. VocabKit helps you expand the words you can use. Join the waitlist." />
 
   <link rel="icon" href="../assets/watermelonkode-favicon.png?v=3" sizes="any">
-  <meta name="theme-color" content="#0c1513" />
+  <meta name="theme-color" content="#000000" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -27,16 +27,196 @@
 
   <script src="https://getlaunchlist.com/js/widget.js" defer></script>
 
-  <link rel="stylesheet" href="../assets/studio.css" />
-  <script src="../assets/studio.js" defer></script>
+  <style>
+    :root {
+      --bg: #0F0F0F;
+      --bg-elev: #151515;
+      --bg-card: #181818;
+      --border: #262626;
+      --border-soft: #1E1E1E;
+
+      --text: #F0EDE8;
+      --text-dim: #A6A29D;
+      --text-faint: #6C6964;
+
+      --red: #FF6060;
+      --red-light: #FF7272;
+      --red-deep: #DA4545;
+      --btn-text: #FFFFFF;
+      --success: #1D9E75;
+
+      --maxw: 1080px;
+      --font: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    ::selection { background: rgba(255,96,96,0.30); color: #fff; }
+    :focus-visible { outline: 2px solid var(--red); outline-offset: 3px; border-radius: 4px; }
+
+    .wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(15,15,15,0.72);
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.0625rem; letter-spacing: -0.01em; }
+    .logo-mark { width: 24px; height: 24px; border-radius: 7px; display: block; flex-shrink: 0; }
+    .breadcrumb { display: flex; align-items: center; gap: 8px; color: var(--text-faint); font-size: 0.8125rem; }
+    .breadcrumb a { color: var(--text-dim); font-weight: 600; }
+    .breadcrumb a:hover { color: var(--text); }
+
+    .nav-cta {
+      font-size: 0.875rem; font-weight: 600;
+      padding: 9px 18px; border-radius: 999px;
+      color: var(--btn-text);
+      background: linear-gradient(135deg, var(--red-deep), var(--red));
+      box-shadow: 0 6px 20px -8px rgba(255,96,96,0.55);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 10px 26px -8px rgba(255,96,96,0.7); }
+
+    .hero { position: relative; padding: 96px 0 72px; overflow: hidden; }
+    .glow {
+      position: absolute; top: -180px; left: 50%; transform: translateX(-50%);
+      width: 900px; height: 700px; pointer-events: none; z-index: 0;
+      background: radial-gradient(closest-side, rgba(255,96,96,0.26), rgba(255,96,96,0) 70%);
+      filter: blur(20px);
+    }
+    .hero .wrap { position: relative; z-index: 1; text-align: center; }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 9px;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--red-light);
+      padding: 6px 14px; border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,96,96,0.06);
+    }
+    .eyebrow img { width: 16px; height: 16px; border-radius: 5px; flex-shrink: 0; }
+
+    h1 {
+      font-size: clamp(2.4rem, 5.6vw, 4rem);
+      font-weight: 800; line-height: 1.06; letter-spacing: -0.035em;
+      margin: 24px auto 0; max-width: 18ch;
+    }
+    h1 .hl { color: var(--red-light); }
+
+    .sub { margin: 22px auto 0; max-width: 58ch; font-size: clamp(1.0625rem, 2.2vw, 1.25rem); color: var(--text-dim); line-height: 1.6; }
+
+    .hero-actions { margin-top: 34px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 0.9375rem; font-weight: 700;
+      padding: 15px 28px; border-radius: 999px;
+      color: var(--btn-text);
+      background: linear-gradient(135deg, var(--red-deep), var(--red));
+      box-shadow: 0 8px 30px -8px rgba(255,96,96,0.5);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 38px -8px rgba(255,96,96,0.65); }
+
+    .btn-ghost {
+      display: inline-flex; align-items: center;
+      font-size: 0.9375rem; font-weight: 600;
+      padding: 15px 24px; border-radius: 999px;
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+      transition: color .2s ease, border-color .2s ease;
+    }
+    .btn-ghost:hover { color: var(--text); border-color: var(--text-faint); }
+
+    .small-links { margin-top: 20px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .btn-small {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 0.8125rem; font-weight: 600;
+      padding: 9px 16px; border-radius: 999px;
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+      transition: color .2s ease, border-color .2s ease;
+    }
+    .btn-small:hover { color: var(--text); border-color: var(--text-faint); }
+    .btn-small svg { width: 13px; height: 13px; }
+
+    .product { padding: 20px 0 90px; }
+    .panel {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,96,96,0.05), rgba(255,96,96,0) 40%), var(--bg-elev);
+      border-radius: 28px;
+      padding: clamp(32px, 5vw, 64px);
+    }
+    .kicker { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-faint); }
+    .panel h2 { margin-top: 14px; font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; letter-spacing: -0.03em; max-width: 22ch; }
+
+    .features { margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .feature { padding-top: 22px; border-top: 1px solid var(--border); }
+    .feature h3 { font-size: 1.0625rem; font-weight: 700; letter-spacing: -0.01em; display: flex; align-items: center; gap: 9px; }
+    .feature h3 .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--red-light); box-shadow: 0 0 8px rgba(255,114,114,0.8); flex-shrink: 0; }
+    .feature p { margin-top: 10px; font-size: 0.9375rem; color: var(--text-dim); line-height: 1.6; }
+
+    .voices { padding: 0 0 90px; }
+    .voices-head { text-align: center; max-width: 46ch; margin: 0 auto 36px; }
+    .voices-head h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; letter-spacing: -0.03em; }
+    .voices-head p { margin-top: 14px; color: var(--text-dim); font-size: 1.0625rem; }
+    .voice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .voice-card { border: 1px solid var(--border); background: var(--bg-card); border-radius: 20px; padding: 30px; }
+    .voice-quote { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.01em; line-height: 1.5; color: var(--text); }
+    .voice-tag { margin-top: 16px; font-size: 0.8125rem; color: var(--text-faint); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+
+    .waitlist { padding: 10px 0 100px; }
+    .waitlist .wrap { text-align: center; }
+    .waitlist h2 { font-size: clamp(1.9rem, 4vw, 2.75rem); font-weight: 800; letter-spacing: -0.03em; }
+    .waitlist .sub { margin-top: 16px; }
+    .signup { margin: 32px auto 0; max-width: 480px; }
+    .reassure { margin-top: 16px; font-size: 0.8125rem; color: var(--text-faint); display: flex; align-items: center; justify-content: center; gap: 7px; }
+    .dot-live { width: 6px; height: 6px; border-radius: 50%; background: var(--success); box-shadow: 0 0 8px rgba(29,158,117,0.7); }
+
+    footer { border-top: 1px solid var(--border-soft); padding: 44px 0; }
+    .foot-inner { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+    .foot-left { display: flex; flex-direction: column; gap: 6px; }
+    .built-by { display: flex; align-items: center; gap: 8px; font-size: 0.8125rem; color: var(--text-faint); }
+    .built-by img { width: 18px; height: 18px; border-radius: 5px; }
+    .built-by a { color: var(--text-dim); font-weight: 600; transition: color .2s ease; }
+    .built-by a:hover { color: var(--text); }
+    .foot-meta { font-size: 0.8125rem; color: var(--text-faint); }
+    .foot-meta a { color: var(--text-dim); }
+    .foot-meta a:hover { color: var(--text); }
+    .socials { display: flex; gap: 20px; font-size: 0.8125rem; }
+    .socials a { color: var(--text-dim); font-weight: 500; transition: color .2s ease; }
+    .socials a:hover { color: var(--text); }
+    .back-row { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border-soft); }
+
+    @media (max-width: 760px) {
+      .features { grid-template-columns: 1fr; gap: 0; }
+      .feature { padding: 22px 0; border-top: 1px solid var(--border); }
+      .feature:first-child { padding-top: 6px; }
+      .voice-grid { grid-template-columns: 1fr; }
+      .foot-inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
 
   <nav class="nav">
     <div class="wrap nav-inner">
       <div class="breadcrumb">
-        <a href="/" class="brand" aria-label="watermelonKode home">
+        <a href="/" class="brand">
           <img src="../assets/watermelonkode-logo.png" alt="" class="logo-mark" aria-hidden="true" />
         </a>
         <span>/</span>
@@ -46,15 +226,14 @@
     </div>
   </nav>
 
-  <main id="main" tabindex="-1">
   <header class="hero">
-    <div class="wrap hero-grid">
-      <div class="hero-copy">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="wrap">
       <span class="eyebrow">
         <img src="../assets/vocabkit-logo.png" alt="" aria-hidden="true" />
-        Coming soon
+        Coming Fall 2026
       </span>
-      <h1>Find the right word <span class="hl">when you need it.</span></h1>
+      <h1>You already understand English. <span class="hl">Let's expand the words you can use.</span></h1>
       <p class="sub">VocabKit helps you grow your vocabulary through real sentences and meaningful context, so you can communicate more naturally, confidently, and precisely every day.</p>
       <div class="hero-actions">
         <a href="#waitlist" class="btn-primary">
@@ -69,42 +248,25 @@
           Privacy Policy
         </a>
       </div>
-      </div>
-      <div class="preview-stage">
-        <div class="preview-card" data-word-preview>
-          <div class="preview-brand">
-            <img src="../assets/vocabkit-logo.png" alt="" width="40" height="40" />
-            <span>VocabKit</span>
-            <span class="preview-label">Vocabulary preview</span>
-          </div>
-          <div class="word-content" aria-live="polite" aria-atomic="true">
-            <p class="word-level" data-word-level>B2 · Adjective</p>
-            <h2 data-word>Resourceful</h2>
-            <p class="word-definition" data-word-definition>Good at finding ways to solve problems.</p>
-            <p class="word-example" data-word-example>“When our supplier cancelled, Maya was resourceful and found a local alternative.”</p>
-          </div>
-          <button class="next-word" type="button" hidden>Next word <span aria-hidden="true">→</span></button>
-        </div>
-      </div>
     </div>
   </header>
 
   <section class="product" id="product">
     <div class="wrap">
-      <div class="panel reveal">
+      <div class="panel">
         <div class="kicker">How VocabKit works</div>
         <h2>Words that live in your life, not in a dictionary.</h2>
 
         <div class="features">
-          <div class="feature reveal">
+          <div class="feature">
             <h3><span class="dot" aria-hidden="true"></span>Real context, every time</h3>
             <p>Every word arrives inside a sentence you would actually hear or say. Never a definition floating on its own with nothing to hold onto.</p>
           </div>
-          <div class="feature reveal">
+          <div class="feature">
             <h3><span class="dot" aria-hidden="true"></span>Built for B1 to C2</h3>
             <p>For people who already understand the language and just want the right word ready the moment they need it, not a beginner's course.</p>
           </div>
-          <div class="feature reveal">
+          <div class="feature">
             <h3><span class="dot" aria-hidden="true"></span>Pop culture to business</h3>
             <p>From slang to boardroom terms, build the vocabulary that actually matters for your studies, your work, and your life.</p>
           </div>
@@ -120,11 +282,11 @@
         <p>You don't need to be one or the other. Most people are a bit of both.</p>
       </div>
       <div class="voice-grid">
-        <div class="voice-card reveal">
+        <div class="voice-card">
           <p class="voice-quote">"I know more English than I sound like I do. I just need the right words at the right moment."</p>
           <p class="voice-tag">Studying, working, living in a second language</p>
         </div>
-        <div class="voice-card reveal">
+        <div class="voice-card">
           <p class="voice-quote">"My ideas are strong. I just want my English to match them."</p>
           <p class="voice-tag">Building a career in a second language</p>
         </div>
@@ -136,14 +298,12 @@
     <div class="wrap">
       <h2>Be first to try VocabKit.</h2>
       <p class="sub">Join the waitlist and be first to know when we launch, plus the occasional vocab tip along the way.</p>
-      <div class="signup reveal">
+      <div class="signup">
         <div class="launchlist-widget" data-key-id="xyvune" data-height="180px"></div>
         <p class="reassure"><span class="dot-live" aria-hidden="true"></span> No spam. Unsubscribe anytime.</p>
       </div>
     </div>
   </section>
-
-  </main>
 
   <footer>
     <div class="wrap">
